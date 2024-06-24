@@ -10,7 +10,7 @@ const postBlog = async ({
   title: string;
   description: string;
 }) => {
-  const res = fetch("http://localhost:3000/api/blog", {
+  const res = fetch("http://localhost:3000/pages/api/blog", {
     method: "POST",
     body: JSON.stringify({ title, description }),
     //@ts-ignore
