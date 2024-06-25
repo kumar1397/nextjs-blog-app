@@ -29,7 +29,7 @@ export const PUT = async (request: NextRequest) => {
   } catch (error) {
     return NextResponse.json({ message: "Error", error }, { status: 500 });
   } finally {
-    // await prisma.$disconnect();
+
   }
 };
 
