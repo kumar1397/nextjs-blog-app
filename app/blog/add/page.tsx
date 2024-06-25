@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { Fragment, useRef } from "react";
 import { Toaster, toast } from "react-hot-toast";
+
 const postBlog = async ({
   title,
   description,
@@ -10,13 +11,13 @@ const postBlog = async ({
   title: string;
   description: string;
 }) => {
-  const res = fetch("http://localhost:3000/api/blog", {
+  const res = await fetch("http://localhost:3000/api/blog", {
     method: "POST",
     body: JSON.stringify({ title, description }),
     //@ts-ignore
     "Content-Type": "application/json",
   });
-  return (await res).json();
+  return res.json();
 };
 
 const AddBlog = () => {
@@ -32,7 +33,7 @@ const AddBlog = () => {
         description: descriptionRef.current?.value,
       });
       toast.success("Blog Posted Successfully", { id: "1" });
-      router.push("/");
+      // router.push("/");
     }
   };
   return (

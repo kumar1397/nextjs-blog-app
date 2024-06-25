@@ -1,35 +1,21 @@
 import prisma from "@/prisma";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-// export async function main() {
-//   try {
-//     await prisma.$connect();
-//   } catch (err) {
-//     return Error("Database Connection Unsuccessull");
-//   }
-// }
-
-export const GET = async (req: Request, res: NextResponse) => {
+export const GET = async (request: NextRequest) => {
   try {
-    await prisma.$connect();
     const posts = await prisma.post.findMany();
     return NextResponse.json({ message: "Success", posts }, { status: 200 });
   } catch (err) {
     return NextResponse.json({ message: "Error", err }, { status: 500 });
-  } finally {
-    await prisma.$disconnect();
-  }
+  } 
 };
 
-export const POST = async (req: Request, res: NextResponse) => {
+export const POST = async (request: NextRequest) => {
   try {
-    const { title, description } = await req.json();
-    await prisma.$connect();
+    const { title, description } = await request.json();
     const post = await prisma.post.create({ data: { description, title } });
     return NextResponse.json({ message: "Success", post }, { status: 201 });
   } catch (err) {
     return NextResponse.json({ message: "Error", err }, { status: 500 });
-  } finally {
-    await prisma.$disconnect();
   }
 };

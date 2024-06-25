@@ -1,10 +1,10 @@
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 import prisma from "@/prisma";
 
-export const GET = async (req: Request, res: NextResponse) => {
+export const GET = async (request: NextRequest) => {
   try {
-    const id = req.url.split("/blog/")[1];
-    await prisma.$connect();
+    const id = request.url.split("/blog/")[1];
+    // await prisma.$connect();
     const post = await prisma.post.findFirst({ where: { id } });
     if (!post)
       return NextResponse.json({ message: "Not Found" }, { status: 404 });
@@ -12,15 +12,15 @@ export const GET = async (req: Request, res: NextResponse) => {
   } catch (error) {
     return NextResponse.json({ message: "Error", error }, { status: 500 });
   } finally {
-    await prisma.$disconnect();
+    // await prisma.$disconnect();
   }
 };
 
-export const PUT = async (req: Request, res: NextResponse) => {
+export const PUT = async (request: NextRequest) => {
   try {
-    const id = req.url.split("/blog/")[1];
-    await prisma.$connect();
-    const { title, description } = await req.json();
+    const id = request.url.split("/blog/")[1];
+    // await prisma.$connect();
+    const { title, description } = await request.json();
     const post = await prisma.post.update({
       data: { title, description },
       where: { id },
@@ -29,19 +29,19 @@ export const PUT = async (req: Request, res: NextResponse) => {
   } catch (error) {
     return NextResponse.json({ message: "Error", error }, { status: 500 });
   } finally {
-    await prisma.$disconnect();
+    // await prisma.$disconnect();
   }
 };
 
-export const DELETE = async (req: Request, res: NextResponse) => {
+export const DELETE = async (request: Request) => {
   try {
-    const id = req.url.split("/blog/")[1];
-    await prisma.$connect();
+    const id = request.url.split("/blog/")[1];
+    // await prisma.$connect();
     const post = await prisma.post.delete({ where: { id } });
     return NextResponse.json({ message: "Success", post }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ message: "Error", error }, { status: 500 });
   } finally {
-    await prisma.$disconnect();
+    // await prisma.$disconnect();
   }
 };
