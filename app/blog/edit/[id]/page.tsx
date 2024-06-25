@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 
 import { Fragment, useEffect, useRef } from "react";
-import { Toaster, toast } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 type UpdateBlogParams = {
   title: string;
   description: string;
@@ -77,7 +77,6 @@ const EditBlog = ({ params }: { params: { id: string } }) => {
   };
   return (
     <Fragment>
-      <Toaster />
       <div className="w-full m-auto flex my-4">
         <div className="flex flex-col justify-center items-center m-auto">
           <p className="text-2xl text-slate-200 font-bold p-3">

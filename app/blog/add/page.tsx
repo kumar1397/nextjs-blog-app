@@ -33,7 +33,7 @@ const AddBlog = () => {
         description: descriptionRef.current?.value,
       });
       toast.success("Blog Posted Successfully", { id: "1" });
-      // router.push("/");
+      router.push("/");
     }
   };
   return (
