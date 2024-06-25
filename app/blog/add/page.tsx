@@ -11,7 +11,7 @@ const postBlog = async ({
   title: string;
   description: string;
 }) => {
-  const res = await fetch("http://localhost:3000/api/blog", {
+  const res = await fetch("/api/blog", {
     method: "POST",
     body: JSON.stringify({ title, description }),
     //@ts-ignore
@@ -24,6 +24,7 @@ const AddBlog = () => {
   const router = useRouter();
   const titleRef = useRef<HTMLInputElement | null>(null);
   const descriptionRef = useRef<HTMLTextAreaElement | null>(null);
+  
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     if (titleRef.current && descriptionRef.current) {
@@ -36,9 +37,9 @@ const AddBlog = () => {
       router.push("/");
     }
   };
+
   return (
     <Fragment>
-      <Toaster />
       <div className="w-full m-auto flex my-4">
         <div className="flex flex-col justify-center items-center m-auto">
           <p className="text-2xl text-slate-200 font-bold p-3">

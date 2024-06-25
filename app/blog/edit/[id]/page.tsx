@@ -10,7 +10,7 @@ type UpdateBlogParams = {
   id: string;
 };
 const updateBlog = async (data: UpdateBlogParams) => {
-  const res = await fetch(`http://localhost:3000/api/blog/${data.id}`, {
+  const res = await fetch(`/api/blog/${data.id}`, {
     method: "PUT",
     body: JSON.stringify({ title: data.title, description: data.description }),
     //@ts-ignore
@@ -21,7 +21,7 @@ const updateBlog = async (data: UpdateBlogParams) => {
 };
 
 const deleteBlog = async (id: string) => {
-  const res = await fetch(`http://localhost:3000/api/blog/${id}`, {
+  const res = await fetch(`/api/blog/${id}`, {
     method: "DELETE",
     //@ts-ignore
     "Content-Type": "application/json",
@@ -30,7 +30,7 @@ const deleteBlog = async (id: string) => {
 };
 
 const getBlogById = async (id: string) => {
-  const res = await fetch(`http://localhost:3000/api/blog/${id}`);
+  const res = await fetch(`/api/blog/${id}`);
   const data = await res.json();
   return data.post;
 };
